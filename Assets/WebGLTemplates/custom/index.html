@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unity WebGL Player | browserData2D</title>
+    <title>Unity WebGL Player | {{{ PRODUCT_NAME }}}</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
   <div id="unity-container" class="unity-desktop">
-    <canvas id="unity-canvas" style="width: 960px; height: 600px; background: #231F20"></canvas>
+    <canvas id="unity-canvas" style="width: {{{ WIDTH }}}px; height: {{{ HEIGHT }}}px; background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}}"></canvas>
     <div id="unity-loading-bar">
       <div id="unity-logo"></div>
       <div id="unity-progress-bar-empty">
@@ -62,13 +62,19 @@
     var buildUrl = "Build/";
     var loaderUrl = buildUrl + "Public.loader.js";
     var config = {
-      dataUrl: buildUrl + "Public.data.br",
-      frameworkUrl: buildUrl + "Public.framework.js.br",
-      codeUrl: buildUrl + "Public.wasm.br",
+      dataUrl: buildUrl + "{{{ DATA_FILENAME }}}",
+      frameworkUrl: buildUrl + "{{{ FRAMEWORK_FILENAME }}}",
+      codeUrl: buildUrl + "{{{ CODE_FILENAME }}}",
+      #if MEMORY_FILENAME
+        memoryUrl: buildUrl + "{{{ MEMORY_FILENAME }}}",
+      #endif
+      #if SYMBOLS_FILENAME
+        symbolsUrl: buildUrl + "{{{ SYMBOLS_FILENAME }}}",
+      #endif
       streamingAssetsUrl: "StreamingAssets",
-      companyName: "DefaultCompany",
-      productName: "browserData2D",
-      productVersion: "1.0",
+      companyName: "{{{ COMPANY_NAME }}}",
+      productName: "{{{ PRODUCT_NAME }}}",
+      productVersion: "{{{ PRODUCT_VERSION }}}",
       showBanner: unityShowBanner,
     };
 
